@@ -4,7 +4,7 @@
 
 <h2>Usuários</h2>
 
-@if($usuarios != null)
+@if(count($usuarios) != 0)
     <table border="1">
         <thead>
             <th>ID</th>
@@ -21,7 +21,7 @@
                     <td>{{ $usuario->nome }}</td>
                     <td>{{ $usuario->username }}</td>
                     <td>{{ $usuario->senha }}</td>
-                    <td>{{ $usuario->tipoUsuario }}</td>
+                    <td>{{ $usuario->tipoUsuario->descricao }}</td>
                     <td>{{ $usuario->empresa->nome }}</td>
                 </tr>
             @endforeach

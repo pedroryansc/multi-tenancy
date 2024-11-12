@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\TipoUsuario;
+use App\Models\Empresa;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -22,7 +24,10 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view("usuario.create");
+        $tiposUsuario = TipoUsuario::all();
+        $empresas = Empresa::all();
+
+        return view("usuario.create", ["tiposUsuario"=>$tiposUsuario, "empresas"=>$empresas]);
     }
 
     /**
@@ -30,14 +35,19 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        if($request->input("tipo_usuario_id") != "" && $request->input("empresa_id") != "" &&
+        $request->input("senha") == $request->input("confirmarSenha")){
+            $usuario = new Usuario();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Usuario $usuario)
-    {
-        //
+            $usuario->nome = $request->input("nome");
+            $usuario->username = $request->input("username");
+            $usuario->senha = $request->input("senha");
+            $usuario->tipo_usuario_id = $request->input("tipo_usuario_id");
+            $usuario->empresa_id = $request->input("empresa_id");
+
+            $usuario->save();
+        }
+
+        return redirect()->route("usuarios.index");
     }
 }

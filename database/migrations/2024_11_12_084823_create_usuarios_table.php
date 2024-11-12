@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string("nome", 45);
             $table->string("username", 45);
             $table->string("senha", 45);
-            $table->unsignedBigInteger("tipo_usuarios_id");
+            $table->unsignedBigInteger("tipo_usuario_id");
             $table->unsignedBigInteger("empresa_id");
             $table->timestamps();
 
-            $table->foreign("tipo_usuarios_id")->references("id")->on("tipo_usuarios");
+            $table->foreign("tipo_usuario_id")->references("id")->on("tipo_usuarios");
             $table->foreign("empresa_id")->references("id")->on("empresas");
         });
     }
