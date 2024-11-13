@@ -4,15 +4,17 @@
 
 <h2>Usuários</h2>
 
-@if(count($usuarios) != 0)
+@if(count($usuarios) > 0)
     <table border="1">
         <thead>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Nome de usuário</th>
-            <th>Senha</th>
-            <th>Tipo de usuário</th>
-            <th>Empresa</th>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Nome de usuário</th>
+                <th>Senha</th>
+                <th>Tipo de usuário</th>
+                <th>Empresa</th>
+            </tr>
         </thead>
         <tbody>
             @foreach($usuarios as $usuario)

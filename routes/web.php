@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\NoticiaController;
@@ -16,6 +17,10 @@ use App\Http\Controllers\NoticiaController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get("/login", [LoginController::class, "index"])->name("login");
+Route::post("/login", [LoginController::class, "verificarLogin"])->name("verificarLogin");
+Route::get("/sair", [LoginController::class, "sair"])->name("sair");
 
 Route::resource("/empresas", EmpresaController::class);
 

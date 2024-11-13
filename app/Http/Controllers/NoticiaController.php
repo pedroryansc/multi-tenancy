@@ -13,17 +13,17 @@ class NoticiaController extends Controller
      */
     public function index($empresa_id)
     {
-        $noticias = Noticia::where("empresa_id", $empresa_id);
+        $empresa = Empresa::find($empresa_id);
 
-        return view("noticia.index", ["noticias"=>$noticias]);
+        return view("noticia.index", ["empresa"=>$empresa]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($empresa_id)
     {
-        //
+        return view("noticia.create", ["empresa"=>$empresa_id]);
     }
 
     /**
@@ -31,37 +31,23 @@ class NoticiaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $noticia = new Noticia();
+
+        $noticia->titulo = $request->input("titulo");
+        $noticia->subtitulo = $request->input("subtitulo");
+        $noticia->texto = $request->input("texto");
+        $noticia->usuario_id = 1;
+        $noticia->empresa_id = 1;
+
+        $noticia->save();
+
+        return redirect()->route("noticias.index", ["empresa_id"=>1]);
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Noticia $noticia)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Noticia $noticia)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Noticia $noticia)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Noticia $noticia)
     {
         //
     }
