@@ -35,15 +35,19 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->input("tipo_usuario_id") != "" && $request->input("empresa_id") != "" &&
+        if($request->input("tipo_usuario_id") != "" && /* $request->input("empresa_id") != "" && */
         $request->input("senha") == $request->input("confirmarSenha")){
+            session_start();
+            
             $usuario = new Usuario();
 
             $usuario->nome = $request->input("nome");
             $usuario->username = $request->input("username");
             $usuario->senha = $request->input("senha");
             $usuario->tipo_usuario_id = $request->input("tipo_usuario_id");
-            $usuario->empresa_id = $request->input("empresa_id");
+            // $usuario->empresa_id = $request->input("empresa_id");
+
+            $usuario->empresa_id = $_SESSION["usuario"]->empresa_id;
 
             $usuario->save();
         }

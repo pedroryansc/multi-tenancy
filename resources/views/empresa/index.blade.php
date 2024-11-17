@@ -1,6 +1,5 @@
-@extends("app")
-
-@section("body")
+@component("app")
+@endcomponent
 
 <h2>Empresas:</h2>
 @if(count($empresas) > 0)
@@ -13,4 +12,5 @@
     <p>Nenhuma empresa foi cadastrada.</p>
 @endif
 
-@endsection
+</body>
+</html>

@@ -23,7 +23,7 @@ class NoticiaController extends Controller
      */
     public function create($empresa_id)
     {
-        return view("noticia.create", ["empresa"=>$empresa_id]);
+        return view("noticia.create", ["empresa_id"=>$empresa_id]);
     }
 
     /**
@@ -31,24 +31,37 @@ class NoticiaController extends Controller
      */
     public function store(Request $request)
     {
+        session_start();
+
         $noticia = new Noticia();
 
         $noticia->titulo = $request->input("titulo");
         $noticia->subtitulo = $request->input("subtitulo");
         $noticia->texto = $request->input("texto");
-        $noticia->usuario_id = 1;
-        $noticia->empresa_id = 1;
+        $noticia->usuario_id = $_SESSION["usuario"]->id;
+        $noticia->empresa_id = $_SESSION["usuario"]->empresa_id;
 
         $noticia->save();
 
-        return redirect()->route("noticias.index", ["empresa_id"=>1]);
+        return redirect()->route("noticias.index", ["empresa_id"=>$_SESSION["usuario"]->empresa_id]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Noticia $noticia)
+    public function show($empresa_id, $noticia_id)
     {
-        //
+        $noticia = Noticia::find($noticia_id);
+
+        return view("noticia.show", ["noticia"=>$noticia]);
+    }
+
+    public function destroy($empresa_id, $noticia_id)
+    {
+        $noticia = Noticia::find($noticia_id);
+
+        $noticia->delete();
+
+        return redirect()->route("noticias.index", ["empresa_id"=>$empresa_id]);
     }
 }

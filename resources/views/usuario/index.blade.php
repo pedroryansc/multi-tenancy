@@ -1,6 +1,14 @@
-@extends("app")
+@component("app")
+@endcomponent
 
-@section("body")
+@php
+
+if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
+    header('location: ../');
+    die();
+}
+
+@endphp
 
 <h2>Usuários</h2>
 
@@ -33,4 +41,5 @@
     <p>Nenhum usuário foi cadastrado.</p>
 @endif
 
-@endsection
+</body>
+</html>

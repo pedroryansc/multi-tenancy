@@ -1,6 +1,14 @@
-@extends("app")
+@component("app")
+@endcomponent
 
-@section("body")
+@php
+
+if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
+    header('location: ../');
+    die();
+}
+
+@endphp
 
 <h2>Cadastro de Usuário</h2>
 
@@ -21,14 +29,15 @@
         @endforeach
     </select>
     <br><br>
-    Empresa: <select name="empresa_id">
+    {{-- Empresa: <select name="empresa_id">
         <option value="">Escolha uma opção</option>
         @foreach($empresas as $empresas)
             <option value="{{ $empresas->id }}">{{ $empresas->nome }}</option>
         @endforeach
     </select>
-    <br><br>
+    <br><br> --}}
     <button type="submit">Cadastrar</button>
 </form>
 
-@endsection
+</body>
+</html>

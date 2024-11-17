@@ -1,6 +1,5 @@
-@extends("app")
-
-@section("body")
+@component("app")
+@endcomponent
 
 <h2>Login</h2>
 
@@ -20,4 +19,5 @@
     <button type="submit">Fazer login</button>
 </form>
 
-@endsection
+</body>
+</html>

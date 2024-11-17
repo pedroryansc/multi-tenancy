@@ -1,21 +1,11 @@
-@extends("app")
-
-@section("body")
-
-<style>
-    .noticia{
-        color: black;
-        text-decoration: none;
-    }
-    div{
-        border: 1px solid black;
-        padding-left: 15px;
-    }
-</style>
+@component("app")
+@endcomponent
 
 <h1>{{ $empresa->nome }}</h1>
 
-<p><a href="{{route('noticias.create', $empresa->id)}}">Cadastrar nova notícia</a></p>
+@if(isset($_SESSION["usuario"]) && $_SESSION["usuario"]->empresa_id == $empresa->id)
+    <p><a href="{{route('noticias.create', $empresa->id)}}">Cadastrar nova notícia</a></p>
+@endif
 
 @if(count($empresa->noticias) > 0)
     @foreach ($empresa->noticias as $noticia)
@@ -24,6 +14,16 @@
                 <h2>{{ $noticia->titulo }}</h2>
                 <p>{{ $noticia->subtitulo }}</p>
                 <h5>{{ $noticia->usuario->nome }} - {{ date_format(date_create($noticia->created_at), "d/m/Y") }}</h5>
+                
+                @if(isset($_SESSION["usuario"]) && $_SESSION["usuario"]->empresa_id == $empresa->id)
+                    <form name="form_delete_{{ $noticia->id }}"
+                    action="{{route('noticias.destroy', [$empresa->id, $noticia->id])}}"
+                    method="post">
+                        @csrf
+                        @method("DELETE")
+                        <p><a href="#" onclick="confirmDelete('form_delete_{{ $noticia->id }}')">Excluir notícia</a></p>
+                    </form>    
+                @endif
             </div>
         </a>
         <br>
@@ -32,4 +32,12 @@
     <p>Nenhuma notícia foi cadastrada.</p>
 @endif
 
-@endsection
+<script>
+    function confirmDelete(formName){
+        if(confirm("Tem certeza que deseja excluir esta notícia?"))
+            document.forms[formName].submit();
+    }
+</script>
+
+</body>
+</html>

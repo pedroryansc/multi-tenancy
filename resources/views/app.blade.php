@@ -6,21 +6,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{csrf_token()}}">
-    @stack("style")
     <title>Portal de Portais de Notícias</title>
+    <style>
+        .noticia{
+            color: black;
+            text-decoration: none;
+        }
+        div{
+            border: 1px solid black;
+            padding-left: 15px;
+        }
+</style>
 </head>
-<body @stack("bodyOnLoad")>
+<body>
     <h1>Portal de Portais de Notícias</h1>
 
     @component("nav")
     @endcomponent
 
     <hr>
-
-    @hasSection("body")
-        @yield("body")
-    @endif
-
-    @stack("script")
-</body>
-</html>
