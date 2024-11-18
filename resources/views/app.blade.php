@@ -8,6 +8,12 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>Portal de Portais de Notícias</title>
     <style>
+        .nav{
+            padding-left: 5px;
+            padding-right: 5px;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+        }
         .noticia{
             color: black;
             text-decoration: none;

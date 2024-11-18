@@ -1,7 +1,35 @@
-| <a href="{{route('empresas.index')}}">Empresas</a> |
-@if(isset($_SESSION["usuario"]) && $_SESSION["usuario"]->tipo_usuario_id == 1)
-    <a href="{{route('usuarios.index')}}">Usuários</a> |
-    <a href="{{route('usuarios.create')}}">Cadastrar usuário</a> |
-@endif
-@if(!isset($_SESSION["usuario"])) <a href="{{route('login')}}">Login</a> @else <a href="{{route('sair')}}">Sair</a> @endif
-|
+<table>
+    <tr>
+        <td class="nav">
+            <a href="{{route('empresas.index')}}">Empresas</a>
+        </td>
+        @if(isset($_SESSION["usuario"]) && $_SESSION["usuario"]->tipo_usuario_id == 1)
+            <td class="nav">
+                <a href="{{route('usuarios.index')}}">Usuários</a>
+            </td>
+            <td class="nav">
+                <a href="{{route('usuarios.create')}}">Cadastrar usuário</a>
+            </td>
+        @endif
+        @if(!isset($_SESSION["usuario"]))
+            <td class="nav">
+                <a href="{{route('login')}}">Login</a>
+            </td>
+        @else
+            <td class="nav">
+                <form name="form_sair" action="{{ route('sair') }}" method="post">
+                    @csrf
+                    @method("GET")
+                    <a href="#" onclick="confirmarSair();">Sair</a>
+                </form>
+            </td>
+        @endif
+    </tr>
+</table>
+
+<script>
+    function confirmarSair(){
+        if(confirm("Tem certeza que deseja sair da sessão?"))
+            document.forms["form_sair"].submit();
+    }
+</script>

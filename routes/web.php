@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\NoticiaController;
+use App\Http\Controllers\ContaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::resource("/empresas", EmpresaController::class);
 Route::resource("/usuarios", UsuarioController::class);
 
 Route::resource("/empresas/{empresa_id}/noticias", NoticiaController::class);
+
+Route::resource("/contas", ContaController::class);
 
 Route::get("/", function(){
     return redirect("/empresas");

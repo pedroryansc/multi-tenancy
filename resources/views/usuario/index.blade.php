@@ -33,6 +33,13 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
                     <td>{{ $usuario->senha }}</td>
                     <td>{{ $usuario->tipoUsuario->descricao }}</td>
                     <td>{{ $usuario->empresa->nome }}</td>
+                    <td>
+                        <form name="form_delete_{{ $usuario->id }}" action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <a href="#" onclick="confirmDelete('form_delete_{{ $usuario->id }}');">Excluir</a>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -40,6 +47,13 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
 @else
     <p>Nenhum usuário foi cadastrado.</p>
 @endif
+
+<script>
+    function confirmDelete(formName){
+        if(confirm("Tem certeza que deseja excluir este usuário?"))
+            document.forms[formName].submit();
+    }
+</script>
 
 </body>
 </html>

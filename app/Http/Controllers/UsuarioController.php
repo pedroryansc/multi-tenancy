@@ -54,4 +54,10 @@ class UsuarioController extends Controller
 
         return redirect()->route("usuarios.index");
     }
+
+    public function destroy(Usuario $usuario){
+        $usuario->delete();
+
+        return redirect()->route("usuarios.index");
+    }
 }

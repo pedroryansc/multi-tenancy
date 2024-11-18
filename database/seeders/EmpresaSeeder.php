@@ -14,8 +14,12 @@ class EmpresaSeeder extends Seeder
      */
     public function run(): void
     {
-        $empresa = ["nome" => "Jovem Nerd"];
+        $empresas = [
+            ["nome" => "Jovem Nerd"],
+            ["nome" => "Omelete"]
+        ];
 
-        Empresa::create($empresa);
+        foreach($empresas as $empresa)
+            Empresa::create($empresa);
     }
 }
