@@ -29,7 +29,7 @@ Route::resource("/usuarios", UsuarioController::class);
 
 Route::resource("/empresas/{empresa_id}/noticias", NoticiaController::class);
 
-Route::resource("/contas", ContaController::class);
+Route::resource("/empresas/{empresa_id}/contas", ContaController::class);
 
 Route::get("/", function(){
     return redirect("/empresas");

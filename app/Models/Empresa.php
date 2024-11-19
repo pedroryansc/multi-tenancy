@@ -18,4 +18,8 @@ class Empresa extends Model
     public function noticias(){
         return $this->hasMany("App\Models\Noticia");
     }
+
+    public function contas(){
+        return $this->hasMany("App\Models\Conta");
+    }
 }

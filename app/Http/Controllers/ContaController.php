@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conta;
+use App\Models\Empresa;
+
 use Illuminate\Http\Request;
 
 class ContaController extends Controller
@@ -10,9 +12,11 @@ class ContaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($empresa_id)
     {
-        $empresa = 
+        $empresa = Empresa::find($empresa_id);
+
+        return view("conta.index", ["empresa"=>$empresa]);
     }
 
     /**

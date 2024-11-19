@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string("descricao", 100);
             $table->unsignedBigInteger("tipo_conta_id");
             $table->date("data");
+            $table->unsignedBigInteger("empresa_id");
             $table->timestamps();
 
             $table->foreign("tipo_conta_id")->references("id")->on("tipo_contas");
+            $table->foreign("empresa_id")->references("id")->on("empresas");
         });
     }
 
