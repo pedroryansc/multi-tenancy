@@ -13,24 +13,22 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->empresa_id != $empresa-
 <h1>Contas de {{ $empresa->nome }}</h1>
 
 @if(count($empresa->contas) > 0)
-    <table>
+    <table border="1">
         <thead>
             <th>ID</th>
             <th>Valor</th>
             <th>Descrição</th>
             <th>Tipo de conta</th>
             <th>Data</th>
-            <th>Empresa</th>
         </thead>
         <tbody>
             @foreach($empresa->contas as $conta)
                 <tr>
                     <td>{{ $conta->id }}</td>
-                    <td>{{ $conta->valor }}</td>
+                    <td>R$ {{ number_format($conta->valor, "2", ",", ".") }}</td>
                     <td>{{ $conta->descricao }}</td>
                     <td>{{ $conta->tipoConta->descricao }}</td>
-                    <td>{{ $conta->data }}</td>
-                    <td>{{ $conta->empresa->nome }}</td>
+                    <td>{{ date_format(date_create($conta->data), "d/m/Y") }}</td>
                     <td>
                         <form
                             name="form_delete_{{ $conta->id }}"
@@ -52,7 +50,7 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->empresa_id != $empresa-
 
 <script>
     function confirmDelete(formName){
-        if(confirm("Tem certeza que deseja excluir este usuário?"))
+        if(confirm("Tem certeza que deseja excluir esta conta?"))
             document.forms[formName].submit();
     }
 </script>

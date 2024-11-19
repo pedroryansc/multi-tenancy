@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             EmpresaSeeder::class,
             TipoUsuarioSeeder::class,
             UsuarioSeeder::class,
+            Usuario_EmpresaSeeder::class,
             TipoContaSeeder::class
         ]);
     }

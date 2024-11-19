@@ -12,7 +12,7 @@ class Empresa extends Model
     protected $fillable = ["nome"];
 
     public function usuarios(){
-        return $this->hasMany("App\Models\Usuario");
+        return $this->belongsToMany("App\Models\Usuario", "usuario__empresas")->withPivot("tipo_usuario_id");
     }
 
     public function noticias(){

@@ -14,8 +14,12 @@ class UsuarioSeeder extends Seeder
      */
     public function run(): void
     {
-        $usuario = ["nome" => "O cara lá de cima", "username" => "admin", "senha" => "1234", "tipo_usuario_id" => 1, "empresa_id" => 1];
+        $usuarios = [
+            ["nome" => "O cara lá de cima", "username" => "admin", "senha" => "1234"],
+            ["nome" => "O outro cara", "username" => "outroAdmin", "senha" => "abcd"]
+        ];
 
-        Usuario::create($usuario);
+        foreach($usuarios as $usuario)
+            Usuario::create($usuario);
     }
 }

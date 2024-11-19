@@ -32,7 +32,7 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
                     <td>{{ $usuario->username }}</td>
                     <td>{{ $usuario->senha }}</td>
                     <td>{{ $usuario->tipoUsuario->descricao }}</td>
-                    <td>{{ $usuario->empresa->nome }}</td>
+                    <td>{{ $usuario->empresas }}</td>
                     <td>
                         <form name="form_delete_{{ $usuario->id }}" action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
                             @csrf

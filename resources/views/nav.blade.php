@@ -8,14 +8,14 @@
                 <a href="{{route('usuarios.index')}}">Usuários</a>
             </td>
             <td class="nav">
-                <a href="{{route('usuarios.create')}}">Cadastrar usuário</a>
+                <a href="{{route('usuarios.create', $_SESSION["usuario"]->id)}}">Cadastrar usuário</a>
             </td>
         @endif
         @if(isset($_SESSION["usuario"]))
             <td class="nav">
                 <a href="{{route('contas.index', $_SESSION['usuario']->empresa_id)}}">Contas</a>
             </td>
-            <td>
+            <td class="nav">
                 <a href="{{route('contas.create', $_SESSION['usuario']->empresa_id)}}">Cadastrar conta</a>
             </td>
         @endif

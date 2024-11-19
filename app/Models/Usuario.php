@@ -9,14 +9,10 @@ class Usuario extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["nome", "username", "senha", "tipo_usuario_id", "empresa_id"];
+    protected $fillable = ["nome", "username", "senha"];
 
-    public function tipoUsuario(){
-        return $this->belongsTo("App\Models\TipoUsuario");
-    }
-
-    public function empresa(){
-        return $this->belongsTo("App\Models\Empresa");
+    public function empresas(){
+        return $this->belongsToMany("App\Models\Empresa", "usuario__empresas")->withPivot("tipo_usuario_id");
     }
 
     public function noticias(){

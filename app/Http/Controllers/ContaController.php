@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Conta;
 use App\Models\Empresa;
+use App\Models\TipoConta;
 
 use Illuminate\Http\Request;
 
@@ -22,48 +23,42 @@ class ContaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($empresa_id)
     {
-        //
+        $tiposConta = TipoConta::all();
+
+        return view("conta.create", ["empresa_id"=>$empresa_id, "tiposConta"=>$tiposConta]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($empresa_id, Request $request)
     {
-        //
-    }
+        session_start();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Conta $conta)
-    {
-        //
-    }
+        $conta = new Conta();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Conta $conta)
-    {
-        //
-    }
+        $conta->valor = $request->input("valor");
+        $conta->descricao = $request->input("descricao");
+        $conta->tipo_conta_id = $request->input("tipo_conta_id");
+        $conta->data = $request->input("data");
+        $conta->empresa_id = $empresa_id;
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Conta $conta)
-    {
-        //
+        $conta->save();
+
+        return redirect()->route("contas.index", ["empresa_id"=>$empresa_id]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Conta $conta)
+    public function destroy($empresa_id, $conta_id)
     {
-        //
+        $conta = Conta::find($conta_id);
+
+        $conta->delete();
+
+        return redirect()->route("contas.index", ["empresa_id"=>$empresa_id]);
     }
 }

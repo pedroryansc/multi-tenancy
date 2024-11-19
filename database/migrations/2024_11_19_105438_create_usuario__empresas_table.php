@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contas', function (Blueprint $table) {
-            $table->id();
-            $table->double("valor");
-            $table->string("descricao", 100);
-            $table->unsignedBigInteger("tipo_conta_id");
-            $table->date("data");
+        Schema::create('usuario__empresas', function (Blueprint $table) {
+            $table->unsignedBigInteger("usuario_id");
             $table->unsignedBigInteger("empresa_id");
+            $table->unsignedBigInteger("tipo_usuario_id");
             $table->timestamps();
 
-            $table->foreign("tipo_conta_id")->references("id")->on("tipo_contas");
+            $table->primary(["usuario_id", "empresa_id"]);
+
+            $table->foreign("usuario_id")->references("id")->on("usuarios");
             $table->foreign("empresa_id")->references("id")->on("empresas");
+            $table->foreign("tipo_usuario_id")->references("id")->on("tipo_usuarios");
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contas');
+        Schema::dropIfExists('usuario__empresas');
     }
 };

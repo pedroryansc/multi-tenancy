@@ -10,19 +10,11 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
 
 @endphp
 
-<h2>Cadastro de Usuário</h2>
+<h2>Relacionamento de Usuário e Empresa</h2>
 
-<form action="{{route('usuarios.store')}}" method="post">
+<form action="{{route('usuariosEmpresas.store')}}" method="post">
     @csrf
-    Nome: <input type="text" name="nome">
-    <br><br>
-    Nome de Usuário: <input type="text" name="username">
-    <br><br>
-    Senha: <input type="password" name="senha">
-    <br><br>
-    Confirmar Senha: <input type="password" name="confirmarSenha">
-    <br><br>
-    Tipo de Usuário: <select name="tipo_usuario_id">
+    Usuário: <select name="usuario_id">
         <option value="">Escolha uma opção</option>
         @foreach($tiposUsuario as $tipoUsuario)
             <option value="{{ $tipoUsuario->id }}">{{ $tipoUsuario->descricao }}</option>

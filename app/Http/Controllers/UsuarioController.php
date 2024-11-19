@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use App\Models\TipoUsuario;
 use App\Models\Empresa;
+use App\Models\Usuario_Empresa;
+
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -22,12 +24,13 @@ class UsuarioController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($usuario_id)
     {
-        $tiposUsuario = TipoUsuario::all();
-        $empresas = Empresa::all();
+        $usuario = Usuario::find($usuario_id);
 
-        return view("usuario.create", ["tiposUsuario"=>$tiposUsuario, "empresas"=>$empresas]);
+        $empresas = $usuario->empresas;
+
+        return view("usuario.create", ["empresas"=>$empresas]);
     }
 
     /**
@@ -35,8 +38,7 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->input("tipo_usuario_id") != "" && /* $request->input("empresa_id") != "" && */
-        $request->input("senha") == $request->input("confirmarSenha")){
+        if($request->input("senha") == $request->input("confirmarSenha")){
             session_start();
             
             $usuario = new Usuario();
@@ -44,10 +46,6 @@ class UsuarioController extends Controller
             $usuario->nome = $request->input("nome");
             $usuario->username = $request->input("username");
             $usuario->senha = $request->input("senha");
-            $usuario->tipo_usuario_id = $request->input("tipo_usuario_id");
-            // $usuario->empresa_id = $request->input("empresa_id");
-
-            $usuario->empresa_id = $_SESSION["usuario"]->empresa_id;
 
             $usuario->save();
         }
