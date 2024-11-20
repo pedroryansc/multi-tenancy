@@ -3,7 +3,7 @@
 
 @php
 
-if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->empresa_id != $empresa_id){
+if(!isset($_SESSION["usuario"]) || $_SESSION["empresa"]->id != $empresa_id){
     header("location: ../../");
     die();
 }

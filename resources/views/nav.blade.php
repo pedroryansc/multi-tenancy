@@ -3,20 +3,20 @@
         <td class="nav">
             <a href="{{route('empresas.index')}}">Empresas</a>
         </td>
-        @if(isset($_SESSION["usuario"]) && $_SESSION["usuario"]->tipo_usuario_id == 1)
+        @if(isset($_SESSION["usuario"]) && $_SESSION["tipo_usuario_id"] == 1)
             <td class="nav">
                 <a href="{{route('usuarios.index')}}">Usuários</a>
             </td>
             <td class="nav">
-                <a href="{{route('usuarios.create', $_SESSION["usuario"]->id)}}">Cadastrar usuário</a>
+                <a href="{{route('usuarios.create')}}">Cadastrar usuário</a>
             </td>
         @endif
         @if(isset($_SESSION["usuario"]))
             <td class="nav">
-                <a href="{{route('contas.index', $_SESSION['usuario']->empresa_id)}}">Contas</a>
+                <a href="{{route('contas.index', $_SESSION['empresa']->id)}}">Contas</a>
             </td>
             <td class="nav">
-                <a href="{{route('contas.create', $_SESSION['usuario']->empresa_id)}}">Cadastrar conta</a>
+                <a href="{{route('contas.create', $_SESSION['empresa']->id)}}">Cadastrar conta</a>
             </td>
         @endif
         @if(!isset($_SESSION["usuario"]))

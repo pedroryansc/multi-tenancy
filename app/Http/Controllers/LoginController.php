@@ -18,18 +18,28 @@ class LoginController extends Controller
 
     public function verificarLogin(Request $request){
         $usuario = Usuario::where([
-            ["empresa_id", $request->input("empresa_id")],
             ["username", $request->input("username")],
             ["senha", $request->input("senha")]
         ])->get();
 
-        if(count($usuario) > 0){
-            session_start();
-            $_SESSION["usuario"] = json_decode($usuario)[0];
+        if(filled($usuario)){
 
-            return redirect()->route("empresas.index");
-        } else
-            return redirect()->route("login");
+            $usuario = $usuario[0];
+
+            for($i = 0; $i < count($usuario->empresas); $i++){
+                if($usuario->empresas[$i]->id == $request->input("empresa_id")){
+                    session_start();
+
+                    $_SESSION["usuario"] = json_decode($usuario);
+                    $_SESSION["empresa"] = json_decode($usuario->empresas[$i]);
+                    $_SESSION["tipo_usuario_id"] = json_decode($usuario->empresas[$i]->pivot->tipo_usuario_id);
+
+                    return redirect()->route("empresas.index");
+                }
+            }
+        }
+
+        return redirect()->route("login");
     }
 
     public function sair(){

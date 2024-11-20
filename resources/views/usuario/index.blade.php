@@ -3,7 +3,7 @@
 
 @php
 
-if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
+if(!isset($_SESSION["usuario"]) || $_SESSION["tipo_usuario_id"] != 1){
     header('location: ../');
     die();
 }
@@ -20,8 +20,7 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
                 <th>Nome</th>
                 <th>Nome de usuário</th>
                 <th>Senha</th>
-                <th>Tipo de usuário</th>
-                <th>Empresa</th>
+                <th>Tipo de usuário/Empresa</th>
             </tr>
         </thead>
         <tbody>
@@ -31,8 +30,16 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
                     <td>{{ $usuario->nome }}</td>
                     <td>{{ $usuario->username }}</td>
                     <td>{{ $usuario->senha }}</td>
-                    <td>{{ $usuario->tipoUsuario->descricao }}</td>
-                    <td>{{ $usuario->empresas }}</td>
+                    <td>
+                        @if(filled($usuario->empresas))
+                            @for($i = 0; $i < count($usuario->empresas); $i++)
+                                @if($i > 0) <br> @endif
+                                {{ $usuario->tipoUsuario[$i]->descricao }} ({{ $usuario->empresas[$i]->nome }})
+                            @endfor
+                        @else
+                            O usuário não está cadastrado em uma empresa.
+                        @endif
+                    </td>
                     <td>
                         <form name="form_delete_{{ $usuario->id }}" action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
                             @csrf

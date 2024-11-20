@@ -16,6 +16,7 @@ class Usuario_EmpresaSeeder extends Seeder
     {
         $usuariosEmpresas = [
             ["usuario_id" => 1, "empresa_id" => 1, "tipo_usuario_id" => 1],
+            ["usuario_id" => 1, "empresa_id" => 2, "tipo_usuario_id" => 1],
             ["usuario_id" => 2, "empresa_id" => 2, "tipo_usuario_id" => 1]
         ];
 

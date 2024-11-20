@@ -17,10 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger("tipo_usuario_id");
             $table->timestamps();
 
-            $table->primary(["usuario_id", "empresa_id"]);
+            $table->primary(["usuario_id", "empresa_id", "tipo_usuario_id"]);
 
-            $table->foreign("usuario_id")->references("id")->on("usuarios");
-            $table->foreign("empresa_id")->references("id")->on("empresas");
+            $table->foreign("usuario_id")->references("id")->on("usuarios")->onDelete("cascade");
+            $table->foreign("empresa_id")->references("id")->on("empresas")->onDelete("cascade");
             $table->foreign("tipo_usuario_id")->references("id")->on("tipo_usuarios");
         });
     }

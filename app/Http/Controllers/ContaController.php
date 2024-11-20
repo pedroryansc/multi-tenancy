@@ -35,8 +35,6 @@ class ContaController extends Controller
      */
     public function store($empresa_id, Request $request)
     {
-        session_start();
-
         $conta = new Conta();
 
         $conta->valor = $request->input("valor");

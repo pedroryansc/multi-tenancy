@@ -39,11 +39,11 @@ class NoticiaController extends Controller
         $noticia->subtitulo = $request->input("subtitulo");
         $noticia->texto = $request->input("texto");
         $noticia->usuario_id = $_SESSION["usuario"]->id;
-        $noticia->empresa_id = $_SESSION["usuario"]->empresa_id;
+        $noticia->empresa_id = $_SESSION["empresa"]->id;
 
         $noticia->save();
 
-        return redirect()->route("noticias.index", ["empresa_id"=>$_SESSION["usuario"]->empresa_id]);
+        return redirect()->route("noticias.index", ["empresa_id"=>$_SESSION["empresa"]->id]);
     }
 
     /**

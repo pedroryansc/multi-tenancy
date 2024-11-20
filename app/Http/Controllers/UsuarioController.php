@@ -24,13 +24,9 @@ class UsuarioController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($usuario_id)
+    public function create()
     {
-        $usuario = Usuario::find($usuario_id);
-
-        $empresas = $usuario->empresas;
-
-        return view("usuario.create", ["empresas"=>$empresas]);
+        return view("usuario.create");
     }
 
     /**
@@ -39,8 +35,6 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         if($request->input("senha") == $request->input("confirmarSenha")){
-            session_start();
-            
             $usuario = new Usuario();
 
             $usuario->nome = $request->input("nome");

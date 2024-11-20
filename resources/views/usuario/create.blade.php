@@ -3,7 +3,7 @@
 
 @php
 
-if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
+if(!isset($_SESSION["usuario"]) || $_SESSION["tipo_usuario_id"] != 1){
     header('location: ../');
     die();
 }
@@ -22,6 +22,8 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
     <br><br>
     Confirmar Senha: <input type="password" name="confirmarSenha">
     <br><br>
+
+    {{--
     Tipo de Usuário: <select name="tipo_usuario_id">
         <option value="">Escolha uma opção</option>
         @foreach($tiposUsuario as $tipoUsuario)
@@ -36,6 +38,8 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo_usuario_id != 1){
         @endforeach
     </select>
     <br><br>
+    --}}
+
     <button type="submit">Cadastrar</button>
 </form>
 

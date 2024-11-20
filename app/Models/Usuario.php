@@ -15,6 +15,10 @@ class Usuario extends Model
         return $this->belongsToMany("App\Models\Empresa", "usuario__empresas")->withPivot("tipo_usuario_id");
     }
 
+    public function tipoUsuario(){
+        return $this->belongsToMany("App\Models\TipoUsuario", "usuario__empresas");
+    }
+
     public function noticias(){
         return $this->hasMany("App\Models\Noticia");
     }
