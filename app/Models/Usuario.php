@@ -16,7 +16,7 @@ class Usuario extends Model
     }
 
     public function tipoUsuario(){
-        return $this->belongsToMany("App\Models\TipoUsuario", "usuario__empresas");
+        return $this->belongsToMany("App\Models\TipoUsuario", "usuario__empresas")->orderByPivot("empresa_id");
     }
 
     public function noticias(){

@@ -7,6 +7,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ContaController;
+use App\Http\Controllers\Usuario_EmpresaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::get("/sair", [LoginController::class, "sair"])->name("sair");
 Route::resource("/empresas", EmpresaController::class);
 
 Route::resource("/usuarios", UsuarioController::class);
+
+Route::resource("/usuarios/{usuario_id}/usuarioEmpresa", Usuario_EmpresaController::class);
 
 Route::resource("/empresas/{empresa_id}/noticias", NoticiaController::class);
 

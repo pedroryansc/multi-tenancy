@@ -22,24 +22,6 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["tipo_usuario_id"] != 1){
     <br><br>
     Confirmar Senha: <input type="password" name="confirmarSenha">
     <br><br>
-
-    {{--
-    Tipo de Usuário: <select name="tipo_usuario_id">
-        <option value="">Escolha uma opção</option>
-        @foreach($tiposUsuario as $tipoUsuario)
-            <option value="{{ $tipoUsuario->id }}">{{ $tipoUsuario->descricao }}</option>
-        @endforeach
-    </select>
-    <br><br>
-    Empresa: <select name="empresa_id">
-        <option value="">Escolha uma opção</option>
-        @foreach($empresas as $empresa)
-            <option value="{{ $empresa->id }}">{{ $empresa->nome }}</option>
-        @endforeach
-    </select>
-    <br><br>
-    --}}
-
     <button type="submit">Cadastrar</button>
 </form>
 

@@ -1,5 +1,6 @@
 @php
-    session_start();
+    if(!isset($_SESSION["usuario"]))
+        session_start();
 @endphp
 <!DOCTYPE html>
 <html lang="pt-br">

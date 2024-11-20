@@ -34,11 +34,14 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["tipo_usuario_id"] != 1){
                         @if(filled($usuario->empresas))
                             @for($i = 0; $i < count($usuario->empresas); $i++)
                                 @if($i > 0) <br> @endif
-                                {{ $usuario->tipoUsuario[$i]->descricao }} ({{ $usuario->empresas[$i]->nome }})
+                                {{ $usuario->tipoUsuario[$i]->descricao }}
+                                ({{ $usuario->empresas[$i]->nome }})
                             @endfor
                         @else
                             O usuário não está cadastrado em uma empresa.
                         @endif
+                        <br>
+                        <a href="{{ route('usuarioEmpresa.create', $usuario->id) }}">[Adicionar empresa]</a>
                     </td>
                     <td>
                         <form name="form_delete_{{ $usuario->id }}" action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
